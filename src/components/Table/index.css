@@ -1,0 +1,34 @@
+.table {
+    max-width: 650px;
+    margin:auto;
+
+    border-radius:12px;
+}
+
+.table-flex {
+    display:flex;
+}
+
+.table-flex-di {
+    flex-direction: column;
+}
+
+.table-top {
+    padding:10px;
+}
+
+.table-blue {
+    background-color:#2E2783;
+}
+
+.table-item-left, .table-item-right {
+    text-align:center;
+}
+
+.text-white {
+    color:var(--text-cl);
+}
+
+.text-white-dark {
+    color:var(--text-sd);
+}
