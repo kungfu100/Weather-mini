@@ -2,8 +2,11 @@
     --color1:#EC79BD;
     --color2:#6360F1;
 
-    height:100vh;
     max-width: 100%;
     
     background-image:linear-gradient(to bottom, var(--color1), var(--color2));
+}
+
+.wrap {
+    position:relative;
 }

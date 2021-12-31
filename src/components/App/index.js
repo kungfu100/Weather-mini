@@ -22,8 +22,6 @@ import {
 } from "../Buttons";
 
 class App extends Component {
-    _isMounted = false;
-
     constructor(props) {
         super(props);
 
@@ -31,6 +29,7 @@ class App extends Component {
             search: DEFAUTL_QUERY,
             searchKey:"",
             data: null,
+            isLoading: false,
             error:"",
         };
 
@@ -41,13 +40,13 @@ class App extends Component {
     }
 
     updateData(data) {
-        this.setState({data});
+        this.setState({data, isLoading:false, error:""});
     }
 
     getApi(search) {
-        axios(`${PATH_BASE}?${PARAM_SEARCH}${search}&${PARAM_UNIT}${default_unit}&${PARAM_LANG}${default_lang}&${PARAM_KEY}${APIkey}`)
-         .then(res => this._isMounted && this.updateData(res.data))
-         .catch(error => this._isMounted && this.setState({error}))
+        axios.get(`${PATH_BASE}?${PARAM_SEARCH}${search}&${PARAM_UNIT}${default_unit}&${PARAM_LANG}${default_lang}&${PARAM_KEY}${APIkey}`)
+         .then(res => this.updateData(res.data))
+         .catch(error => this.setState({error: error.message}))
     }
 
     onChange(event) {
@@ -58,31 +57,22 @@ class App extends Component {
         const {search} = this.state;
 
         this.getApi(search);
-        this.setState({searchKey: search});
+        this.setState({searchKey: search, isLoading:true,});
 
         event.preventDefault();
     }
 
-    componentWillMount() {
-        this._isMounted = false;
-    }
-
     componentDidMount() {
-        this._isMounted = true;
-
         const {search} = this.state;
 
-        this.getApi(search);
+        this.setState({searchKey:search, isLoading: true,});
 
-        this.setState({searchKey:search});
+        this.getApi(search);
     }
 
     render() {
-        const {search, data, error} = this.state;
+        const {search, data, isLoading, error} = this.state;
         console.log(this.state);
-        console.log(data);
-
-        if(!data) {return null};
 
         return(
             <div className="app">
@@ -98,10 +88,16 @@ class App extends Component {
                         <h1>Daily Weather</h1>
                     </header>
 
-                    {/*error
+                    {isLoading
+                     ? <div>Loading ...</div>
+                     : error
                         ? <div>FAIL</div>
-                        : <Table data={data} />
-                    */}
+                        : data 
+                        && <Table 
+                                data={data} 
+                                cTable="wrap"
+                           />
+                    }
 
                     <TestButton
                     >

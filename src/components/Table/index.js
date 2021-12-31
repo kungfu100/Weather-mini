@@ -1,24 +1,37 @@
+import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
 import React, {Component} from "react";
 import "./index.css";
 
 import TableTop from "./TableTop";
 
+const tableBottom = {
+    minHeight:"300px",
+    backgroundColor: "white",
+    width:"100%",
+}
+
 class Table extends Component {
 
     render() {
-        const {data} = this.props;
+        const {data, cTable} = this.props;
         const {main, weather, name} = data;
 
         return(
-            <div>
+            <div className={cTable}>
                 <div className="table table-flex table-flex-di">
                     <TableTop
-                        classTable="table-top table-flex table-blue"
+                        classTable="table-top table-flex"
                         main={main}
                         weather={weather}
                         name={name}
                     />
+                    
+                    <div 
+                        className="table-bottom"
+                        style={tableBottom}
+                    >
 
+                    </div>
                 </div>
             </div>
     )}

@@ -1,6 +1,10 @@
 :root {
   --text-cl:#fff;
-  --text-sd:rgb(255,255,255,0.7);
+  --text-sd:#ffffffb3;
+  --i:rgba(150,255,100);
+  --i-up:4px;
+  --i-down:calc(-1*var(--i-up));
+  --table-t:#443480;
 }
 
 html {
@@ -27,7 +31,6 @@ body {
 }
 
 h1 {
-  font-weight:700;
   text-align:center;
 
   color:var(--text-cl);
@@ -36,6 +39,18 @@ h1 {
     0 0 5px var(--text-sd), 
     0 0 13px var(--text-sd),
     0 0 20px var(--text-sd);
+}
+
+h1, h3, h3 {
+  font-weight: 700;
+}
+
+p, h1, h2, h3 {
+  margin:0.3rem;
+}
+
+span {
+  margin:0 0.3rem 0 0.3rem;
 }
 
 img {

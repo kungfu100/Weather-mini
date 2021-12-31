@@ -6,38 +6,40 @@ const TableTop = (props) => {
 
     return(
         <div className={classTable}>
-            <div className="table-item-left table-flex-di">
+            <div className="table-item-left">
                 <div>
-                    <h2 className="text-white">
+                    <h3 className="text-white text-size">
                         {temp}
                         <span>&#8451;</span>
-                    </h2>
+                    </h3>
                     
                     {weather.map(value => 
-                        <h3 
-                            className="text-white-dark"
+                        <p 
+                            className="text-white-dark text-spacing"
                             key={value.id}
                         >
                             {value.description.toUpperCase()}
-                        </h3>
+                        </p>
                     )}
                 </div>
 
-                <div>
+                <div className="table-flex table-flex-j ">
                     <p className="text-white-dark">
                         {temp_min}
-                        <i className='fas fa-long-arrow-alt-down'></i>
+                        <span>&#8451;</span>
+                        <i className='fas fa-long-arrow-alt-down text-i text-down'></i>
                     </p>
 
                     <p className="text-white-dark">
                         {temp_max}
-                        <i className='fas fa-long-arrow-alt-up'></i>
+                        <span>&#8451;</span>
+                        <i className='fas fa-long-arrow-alt-up text-i text-up'></i>
                     </p>
                 </div>
             </div>
 
             <div className="table-item-right">
-                <h2 className="text-white">
+                <h2 className="text-white text-city">
                     {name.toUpperCase()}
                 </h2>
             </div>
