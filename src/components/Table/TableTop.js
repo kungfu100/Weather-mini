@@ -3,6 +3,10 @@ import React, {Component} from "react";
 const TableTop = (props) => {
     const {main, weather, name, classTable=""} = props;
     const {temp, temp_min, temp_max} = main;
+    
+    /*const temp = main.temp || Number();
+    const temp_min = main.temp_min || Number();
+    const temp_max = main.temp_max || Number();*/
 
     return(
         <div className={classTable}>

@@ -1,6 +1,7 @@
 :root {
   --text-cl:#fff;
   --text-sd:#ffffffb3;
+  --search-block:rgba(0,0,0,0.7);
   --i:rgba(150,255,100);
   --i-up:4px;
   --i-down:calc(-1*var(--i-up));

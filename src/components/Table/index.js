@@ -1,4 +1,3 @@
-import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
 import React, {Component} from "react";
 import "./index.css";
 
@@ -13,7 +12,7 @@ const tableBottom = {
 class Table extends Component {
 
     render() {
-        const {data, cTable} = this.props;
+        const {data, cTable=""} = this.props;
         const {main, weather, name} = data;
 
         return(

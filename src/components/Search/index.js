@@ -1,10 +1,11 @@
 import React, {Component} from "react";
+import "./index.css";
 
 const Search = (props) => {
     const {onSubmit, onChange, value,} = props;
 
     return(
-        <div>
+        <div className="wrap search">
             <form onSubmit={onSubmit}>
                 <input
                     type="text"

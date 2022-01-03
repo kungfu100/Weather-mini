@@ -3,10 +3,36 @@
     --color2:#6360F1;
 
     max-width: 100%;
-    
+    min-height:100vh;
+
     background-image:linear-gradient(to bottom, var(--color1), var(--color2));
 }
 
 .wrap {
-    position:relative;
+    max-width:100%;
+}
+
+.load {
+	--color:rgb(0,255,0);
+    --size:100px;
+
+	margin: auto;
+    margin-top:25%;
+    
+    width:var(--size);
+    height:10px;
+    background-color:var(--color);
+    
+    animation-name:load-up;
+    animation-duration:0.5s;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+    animation-direction:alternate;
+}
+
+@keyframes load-up {
+	from {transform: translateY(0);}
+    50% {--size:50px;transform:translateY(-20px); opacity:0.5;}
+    90% {--size:10px;}
+    100% {--size:0;transform:translateY(-40px); opacity:0;}
 }

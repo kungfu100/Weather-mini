@@ -10,3 +10,9 @@ export const PARAM_LANG = "lang="
 
 export const DEFAUTL_QUERY = "London";
 
+export const withEither = (conditionFn, ComponentEither) => (Component) => (props) =>
+    conditionFn(props)
+    ? <ComponentEither {...props} />
+    : <Component {...props} />
+
+

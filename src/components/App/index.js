@@ -12,15 +12,30 @@ import {
     PARAM_UNIT,
     PARAM_LANG,
     DEFAUTL_QUERY,
+    withEither,
 } from "../../constants";
 
 import Table from "../Table";
 import Search from "../Search";
 
-import {
-    TestButton,
-} from "../Buttons";
+//---------------------------------------------
+const Error = () => {
+    return(
+        <div>
+            <p>Sorry, No Result Found</p>
+        </div>
+)}
+const isError = (props) =>  props.isError 
 
+const Loading = () => <div className="load"></div>
+const isLoading = (props) => props.isLoading
+
+const withError = withEither(isError, Error);
+const withLoading = withEither(isLoading, Loading);
+
+const TableWithCondition = withError(withLoading(Table));
+
+//---------------------------------------------
 class App extends Component {
     constructor(props) {
         super(props);
@@ -73,36 +88,28 @@ class App extends Component {
     render() {
         const {search, data, isLoading, error} = this.state;
         console.log(this.state);
-
+ 
         return(
             <div className="app">
                 <Search
                     value={search}
                     onChange={this.onChange}
                     onSubmit={this.onSubmit}
-                >
-                </Search>
-
+                />
+                
                 <main>
                     <header>
                         <h1>Daily Weather</h1>
                     </header>
 
-                    {isLoading
-                     ? <div>Loading ...</div>
-                     : error
-                        ? <div>FAIL</div>
-                        : data 
-                        && <Table 
-                                data={data} 
-                                cTable="wrap"
-                           />
+                    {data && 
+                        <TableWithCondition 
+                            data={data}
+                            isLoading={isLoading}
+                            isError={error}
+                        />
                     }
 
-                    <TestButton
-                    >
-                        Test
-                    </TestButton>
                 </main>
             </div>
     )}
