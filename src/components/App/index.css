@@ -3,13 +3,21 @@
     --color2:#6360F1;
 
     max-width: 100%;
-    min-height:100vh;
+    min-height: 100vh;
 
     background-image:linear-gradient(to bottom, var(--color1), var(--color2));
 }
 
 .wrap {
     max-width:100%;
+}
+
+.wrap-position {
+    position:relative;
+}
+
+.wrap-padding-bottom {
+    padding-bottom:1em;
 }
 
 .load {

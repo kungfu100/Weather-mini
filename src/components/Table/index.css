@@ -1,6 +1,7 @@
 .table {
     max-width: 800px;
     margin:auto;
+    margin-bottom:1em;
 
     border: 1px solid transparent;
     border-radius:12px;
@@ -104,4 +105,32 @@
 @keyframes down {
     from {transform:translateY(0);}
     to {transform:translateY(var(--i-down))}
+}
+
+/*---------------------------------*/
+.btn-dismiss {
+    position:absolute;
+    top:0;
+    right:5px;
+
+    background-color: transparent;
+
+    border:none;
+}
+
+.btn-i {
+    --i:rgb(245, 18, 90);
+
+    font-size:2rem;
+    font-weight: 700;
+
+    color:var(--i);
+
+    transition:0.1s ease-in;
+}
+
+.btn-dismiss:active .btn-i {
+    text-shadow:
+        0 0 10px var(--text-cl),
+        0 0 20px var(--text-cl);
 }

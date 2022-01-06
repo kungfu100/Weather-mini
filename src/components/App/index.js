@@ -44,24 +44,53 @@ class App extends Component {
             search: DEFAUTL_QUERY,
             searchKey:"",
             data: null,
+            dataCache:null,
+            list:[],
             isLoading: false,
             error:"",
         };
 
+        this.needToSearch = this.needToSearch.bind(this);
         this.updateData = this.updateData.bind(this);
         this.getApi = this.getApi.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onDismiss = this.onDismiss.bind(this);
     }
 
     updateData(data) {
-        this.setState({data, isLoading:false, error:""});
+
+        this.setState(prevState => {
+            const {searchKey,} = this.state;
+
+            return {
+                data, 
+                dataCache: {
+                    ...prevState.dataCache,
+                    [searchKey]: {data}
+                },
+                list:[
+                    ...prevState.list,
+                    data
+                ],
+                isLoading:false, 
+                error:""
+            }
+        });
+    }
+
+    needToSearch(search) {
+        return !this.state.dataCache[search];
     }
 
     getApi(search) {
         axios.get(`${PATH_BASE}?${PARAM_SEARCH}${search}&${PARAM_UNIT}${default_unit}&${PARAM_LANG}${default_lang}&${PARAM_KEY}${APIkey}`)
          .then(res => this.updateData(res.data))
-         .catch(error => this.setState({error: error.message}))
+         .catch(error => this.setState({
+             dataCache:null,
+             list:[],
+             error: error.message
+         }))
     }
 
     onChange(event) {
@@ -69,16 +98,33 @@ class App extends Component {
     }
 
     onSubmit(event) {
-        const {search} = this.state;
+        const {search,} = this.state;
 
-        this.getApi(search);
-        this.setState({searchKey: search, isLoading:true,});
+        this.setState({
+            searchKey: search, 
+            isLoading:true,
+        });
+
+        if(this.needToSearch(search)) {
+            this.getApi(search);
+        }else {
+            this.setState({isLoading: false})
+        }
 
         event.preventDefault();
     }
 
+    onDismiss(id) {
+        const {list} = this.state;
+
+        const isId = item => item.id !== id
+        const updateList = list.filter(isId);
+
+        this.setState({list:updateList});
+    }
+
     componentDidMount() {
-        const {search} = this.state;
+        const {search,} = this.state;
 
         this.setState({searchKey:search, isLoading: true,});
 
@@ -86,8 +132,10 @@ class App extends Component {
     }
 
     render() {
-        const {search, data, isLoading, error} = this.state;
+        const {search, list, isLoading, error} = this.state;
         console.log(this.state);
+
+        const _list = list || [];
  
         return(
             <div className="app">
@@ -102,14 +150,15 @@ class App extends Component {
                         <h1>Daily Weather</h1>
                     </header>
 
-                    {data && 
-                        <TableWithCondition 
-                            data={data}
-                            isLoading={isLoading}
-                            isError={error}
-                        />
-                    }
-
+                    
+                    <TableWithCondition 
+                        classTable="wrap-padding-bottom"
+                        list={_list}
+                        isLoading={isLoading}
+                        isError={error}
+                        onDismiss={this.onDismiss}
+                    />
+                    
                 </main>
             </div>
     )}

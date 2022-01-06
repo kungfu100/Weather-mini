@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 
 const TableTop = (props) => {
-    const {main, weather, name, classTable=""} = props;
+    const {main, weather, name, classTableTop="", children} = props;
     const {temp, temp_min, temp_max} = main;
     
     /*const temp = main.temp || Number();
@@ -9,7 +9,7 @@ const TableTop = (props) => {
     const temp_max = main.temp_max || Number();*/
 
     return(
-        <div className={classTable}>
+        <div className={classTableTop}>
             <div className="table-item-left">
                 <div>
                     <h3 className="text-white text-size">
@@ -47,6 +47,8 @@ const TableTop = (props) => {
                     {name.toUpperCase()}
                 </h2>
             </div>
+
+            {children}
         </div>
     )
 }

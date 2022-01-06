@@ -1,11 +1,12 @@
 :root {
   --text-cl:#fff;
   --text-sd:#ffffffb3;
+  --table-t:#443480;
+  --border-search:#E6DE5A;
   --search-block:rgba(0,0,0,0.7);
   --i:rgba(150,255,100);
   --i-up:4px;
   --i-down:calc(-1*var(--i-up));
-  --table-t:#443480;
 }
 
 html {
@@ -57,6 +58,10 @@ span {
 img {
   display:inline-block;
   max-width:100%;
+}
+
+button {
+  cursor:pointer;
 }
 
 code {

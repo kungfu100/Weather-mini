@@ -1,3 +1,3 @@
-import TestButton from "./TestButton";
+import DismissButton from "./DismissButton";
 
-export {TestButton};
+export {DismissButton};

@@ -1,5 +1,43 @@
 .search {
-    text-align: center;
     background-color:var(--search-block);
-    padding:5px;
+
+    padding:5px 0;
+}
+
+.search > form {
+    justify-content:center;
+}
+
+.search-input {
+    font-size:1.2rem;
+    padding:5px 10px;
+    margin-right:5px;
+
+    color:var(--text-cl);
+    background-color:rgba(0,0,0,0.1);
+
+    border:3px solid var(--border-search);
+    border-radius:6px;
+    outline:none;
+}
+
+.search-input:focus {
+    background-color: #E8F0FE;
+    color:black;
+}
+
+.search-btn {
+    background-color:transparent;
+    border:none;
+    outline:none;
+}
+
+.search-i {
+    font-size:1.7rem;
+    font-weight:700;
+    color:var(--border-search);
+}
+
+.search-i:active {
+    color:#E8F0FE;
 }
