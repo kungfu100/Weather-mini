@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import PropTypes from "prop-types";
 
 const TableTop = (props) => {
     const {main, weather, name, classTableTop="", children} = props;
@@ -51,6 +52,25 @@ const TableTop = (props) => {
             {children}
         </div>
     )
+}
+
+TableTop.propTypes = {
+    main: PropTypes.objectOf(
+        PropTypes.shape({
+            temp: PropTypes.number,
+            temp_max: PropTypes.number,
+            temp_min: PropTypes.number
+        })
+    ).isRequired,
+    weather: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            description: PropTypes.string,
+        })
+    ).isRequired,
+    name: PropTypes.string,
+    classTableTop: PropTypes.string,
+    children: PropTypes.node,
 }
 
 export default TableTop;

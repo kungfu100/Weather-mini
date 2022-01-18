@@ -62,15 +62,16 @@ class App extends Component {
 
         this.setState(prevState => {
             const {searchKey,} = this.state;
+            const {dataCache, list} = prevState;
 
             return {
                 data, 
                 dataCache: {
-                    ...prevState.dataCache,
-                    [searchKey]: {data}
+                    ...dataCache,
+                    [searchKey]: {...data}
                 },
                 list:[
-                    ...prevState.list,
+                    ...list,
                     data
                 ],
                 isLoading:false, 
@@ -84,12 +85,12 @@ class App extends Component {
     }
 
     getApi(search) {
+        this.setState({isLoading: true,})
+
         axios.get(`${PATH_BASE}?${PARAM_SEARCH}${search}&${PARAM_UNIT}${default_unit}&${PARAM_LANG}${default_lang}&${PARAM_KEY}${APIkey}`)
          .then(res => this.updateData(res.data))
          .catch(error => this.setState({
-             dataCache:null,
-             list:[],
-             error: error.message
+            error: error.message
          }))
     }
 
@@ -102,13 +103,12 @@ class App extends Component {
 
         this.setState({
             searchKey: search, 
-            isLoading:true,
+            error: "",
+            isLoading: false,
         });
 
         if(this.needToSearch(search)) {
-            this.getApi(search);
-        }else {
-            this.setState({isLoading: false})
+          this.getApi(search);
         }
 
         event.preventDefault();
@@ -120,13 +120,28 @@ class App extends Component {
         const isId = item => item.id !== id
         const updateList = list.filter(isId);
 
-        this.setState({list:updateList});
+        const keyDataCache = Object.keys(this.state.dataCache);
+        let updateDataCache = {...this.state.dataCache};
+    
+        keyDataCache.forEach(key => {
+            if(updateDataCache[key].id === id) {
+                delete updateDataCache[key];
+            }
+        })
+
+        this.setState({
+            list:updateList, 
+            dataCache: updateDataCache
+        });
+
+        //nếu id truyền vào giống trong searchKey 
+        //của dataCache thì xóa nó đi
     }
 
     componentDidMount() {
         const {search,} = this.state;
 
-        this.setState({searchKey:search, isLoading: true,});
+        this.setState({searchKey:search});
 
         this.getApi(search);
     }

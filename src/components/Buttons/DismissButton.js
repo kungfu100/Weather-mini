@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import PropTypes from "prop-types";
 
 const DismissButton = (props) => {
     const {classDismiss="", onDismiss, children } = props;
@@ -14,5 +15,10 @@ const DismissButton = (props) => {
     )
 }
 
+DismissButton.propTypes = {
+    classDismiss: PropTypes.string,
+    onDismiss: PropTypes.func.isRequired,
+    children: PropTypes.node,
+}
 
 export default DismissButton;

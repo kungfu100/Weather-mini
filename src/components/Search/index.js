@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, {Component} from "react";
 import "./index.css";
 
@@ -23,6 +24,12 @@ const Search = (props) => {
             </form>
         </div>
     )
+}
+
+Search.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.node,
 }
 
 export default Search;
