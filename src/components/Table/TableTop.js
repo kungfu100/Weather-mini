@@ -55,13 +55,11 @@ const TableTop = (props) => {
 }
 
 TableTop.propTypes = {
-    main: PropTypes.objectOf(
-        PropTypes.shape({
-            temp: PropTypes.number,
-            temp_max: PropTypes.number,
-            temp_min: PropTypes.number
-        })
-    ).isRequired,
+    main: PropTypes.shape({
+        temp: PropTypes.number,
+        temp_max: PropTypes.number,
+        temp_min: PropTypes.number
+    }).isRequired,
     weather: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,

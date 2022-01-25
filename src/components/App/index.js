@@ -7,11 +7,17 @@ import {
     default_unit,
     default_lang,
     PATH_BASE,
+    PATH_WEATHER,
+    PATH_ONECALL,
     PARAM_SEARCH,
     PARAM_KEY,
     PARAM_UNIT,
     PARAM_LANG,
+    PARAM_LAT,
+    PARAM_LON,
+    PARAM_EXCLUDE,
     DEFAUTL_QUERY,
+    DEFAULT_EXCLUDE,
     withEither,
 } from "../../constants";
 
@@ -45,9 +51,12 @@ class App extends Component {
             searchKey:"",
             data: null,
             dataCache:null,
+            dataDaily: [],
             list:[],
             isLoading: false,
             error:"",
+
+            other:null,
         };
 
         this.needToSearch = this.needToSearch.bind(this);
@@ -75,7 +84,7 @@ class App extends Component {
                     data
                 ],
                 isLoading:false, 
-                error:""
+                error:"",
             }
         });
     }
@@ -87,10 +96,37 @@ class App extends Component {
     getApi(search) {
         this.setState({isLoading: true,})
 
-        axios.get(`${PATH_BASE}?${PARAM_SEARCH}${search}&${PARAM_UNIT}${default_unit}&${PARAM_LANG}${default_lang}&${PARAM_KEY}${APIkey}`)
+        axios.get(`${PATH_BASE}${PATH_WEATHER}?${PARAM_SEARCH}${search}&${PARAM_UNIT}${default_unit}&${PARAM_LANG}${default_lang}&${PARAM_KEY}${APIkey}`)
          .then(res => this.updateData(res.data))
+         .then(() => {
+            const {data} = this.state;
+            const {coord} = data;
+
+             axios.get(`${PATH_BASE}${PATH_ONECALL}?${PARAM_LAT}${coord.lat}&${PARAM_LON}${coord.lon}&${PARAM_EXCLUDE}${DEFAULT_EXCLUDE}&${PARAM_UNIT}${default_unit}&${PARAM_LANG}${default_lang}&${PARAM_KEY}${APIkey}`)
+              .then(res => this.setState(preveState => {
+                    const {dataDaily} = preveState;
+                    const {data} = res;
+                    const {daily} = data
+
+                    return {
+                        dataDaily: [
+                            ...dataDaily,
+                            daily,
+                        ],
+                        
+                        other: {
+                            ...preveState.other,
+                            [this.state.searchKey]: [
+                                this.state.data,
+                                data,
+                            ]
+                        }
+                    }
+              }))
+         })
          .catch(error => this.setState({
-            error: error.message
+            error: error.message,
+            isLoading: false,
          }))
     }
 
@@ -104,7 +140,6 @@ class App extends Component {
         this.setState({
             searchKey: search, 
             error: "",
-            isLoading: false,
         });
 
         if(this.needToSearch(search)) {
@@ -136,6 +171,17 @@ class App extends Component {
 
         //nếu id truyền vào giống trong searchKey 
         //của dataCache thì xóa nó đi
+
+        const keyOther = Object.keys(this.state.other);
+        let updateOther = {...this.state.other};
+    
+        keyOther.forEach(key => {
+            if(updateOther[key][0].id === id) {
+                delete updateOther[key];
+            }
+        })
+
+        this.setState({other: updateOther});
     }
 
     componentDidMount() {
@@ -143,14 +189,14 @@ class App extends Component {
 
         this.setState({searchKey:search});
 
-        this.getApi(search);
+        this.getApi(search,);
     }
 
     render() {
-        const {search, list, isLoading, error} = this.state;
+        const {search, list, dataDaily, isLoading, error} = this.state;
         console.log(this.state);
 
-        const _list = list || [];
+        const _list = list || []; 
  
         return(
             <div className="app">
@@ -164,11 +210,11 @@ class App extends Component {
                     <header>
                         <h1>Daily Weather</h1>
                     </header>
-
                     
                     <TableWithCondition 
                         classTable="wrap-padding-bottom"
                         list={_list}
+                        dailyList={dataDaily}
                         isLoading={isLoading}
                         isError={error}
                         onDismiss={this.onDismiss}

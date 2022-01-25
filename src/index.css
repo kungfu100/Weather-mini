@@ -64,6 +64,10 @@ button {
   cursor:pointer;
 }
 
+main {
+  padding: 0 0.7rem;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

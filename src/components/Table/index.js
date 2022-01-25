@@ -3,18 +3,12 @@ import "./index.css";
 
 import { DismissButton } from "../Buttons";
 import TableTop from "./TableTop";
-
-const tableBottom = {
-    minHeight:"230px",
-    backgroundColor: "white",
-    width:"100%",
-}
-
+import TableBottom from "./TableBottom";
 
 class Table extends Component {
    
     render() {
-        const {list, onDismiss, classTable=""} = this.props;
+        const {list, dailyList, onDismiss, classTable=""} = this.props;
 
         return(
             <div className={classTable}>
@@ -22,7 +16,7 @@ class Table extends Component {
                     const {id, main, weather, name} = item;
 
                  return(
-                    <div 
+                    <div
                         key={id}
                         className="table table-flex table-flex-di"
                     >
@@ -40,11 +34,12 @@ class Table extends Component {
                             </DismissButton>
                         </TableTop>
                         
-                        <div 
-                            className="table-bottom"
-                            style={tableBottom}
+                        <TableBottom
+                            classTableBottom="table-bottom table-flex table-flex-j-sb"
+                            dailyList={dailyList}
                         >
-                        </div>
+
+                        </TableBottom>
                     </div>
                  )})
                 }       
