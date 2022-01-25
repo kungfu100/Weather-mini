@@ -74,17 +74,7 @@ class App extends Component {
             const {dataCache, list} = prevState;
 
             return {
-                data, 
-                dataCache: {
-                    ...dataCache,
-                    [searchKey]: {...data}
-                },
-                list:[
-                    ...list,
-                    data
-                ],
-                isLoading:false, 
-                error:"",
+               
             }
         });
     }
