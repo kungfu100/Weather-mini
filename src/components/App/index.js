@@ -188,20 +188,12 @@ class App extends Component {
         const {search, dataCache, isLoading, error} = this.state;
         console.log(this.state);
 
-        const currentObj = null;
-        const foreCastObj = null;
-
         const list = dataCache && dataCache[search] && dataCache[search][1]
             ? Object.values(dataCache)
             : []
-        
-        list.forEach((item, index) => {
-            if(index === 1) {
-                currentObj = 
-            }
-        })
 
         return(
+           /* -----test-------
             <div className="app">
                 <Search
                     value={search}
@@ -214,29 +206,36 @@ class App extends Component {
                         <h1>Daily Weather</h1>
                     </header>
 
-                  {/*
-                        list(value => {
+                    <div className="wrap-padding-bottom">
+                        {
+                            list.map(item => {
+                                return(
+                                    <div className="table">
+                                        <div className="table-top">
+                                            <h2>{item[0].main.temp}</h2>
+                                        </div>
 
-
-                            return(
-                             <div className="wrap-padding-bottom">
-                                 <div className="table">
-                                    <div className="table-top">
-                                        {}
+                                        <div className="table-bottom">
+                                            {
+                                                item[1].daily.slice(1,4).map(item => {
+                                                    return(
+                                                        <div>
+                                                            {item.temp.day}
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                        </div>
                                     </div>
-
-                                    <div className="table-bottom">
-
-                                    </div>
-                                 </div>
-                             </div>   
-                        )})*/
-                    }
+                                )
+                            }) 
+                        }
+                    </div>
                 </main>
             </div>
+            ------------------------*/
 
-
-            /*<div className="app">
+            <div className="app">
                 <Search
                     value={search}
                     onChange={this.onChange}
@@ -250,15 +249,14 @@ class App extends Component {
                     
                     <TableWithCondition 
                         classTable="wrap-padding-bottom"
-                        list={_list}
-                        dailyList={dataDaily}
+                        list={list}
                         isLoading={isLoading}
                         isError={error}
                         onDismiss={this.onDismiss}
                     />
                     
                 </main>
-            </div>*/
+            </div>
     )}
 }
 

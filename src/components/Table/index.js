@@ -8,12 +8,13 @@ import TableBottom from "./TableBottom";
 class Table extends Component {
    
     render() {
-        const {list, dailyList, onDismiss, classTable=""} = this.props;
+        const {list, onDismiss, classTable=""} = this.props;
 
         return(
             <div className={classTable}>
                 {list.map(item => {
-                    const {id, main, weather, name} = item;
+                    const {id, main, weather, name} = item[0]; // item[0] of current
+                    const {daily} = item[1]; // item[1] of daily
 
                  return(
                     <div
@@ -36,7 +37,7 @@ class Table extends Component {
                         
                         <TableBottom
                             classTableBottom="table-bottom table-flex table-flex-j-sb"
-                            dailyList={dailyList}
+                            daily = {daily}
                         >
 
                         </TableBottom>
