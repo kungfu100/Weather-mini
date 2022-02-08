@@ -156,21 +156,34 @@ class App extends Component {
     onDismiss(id) {
         const {dataCache, searchKey} = this.state;
 
-        const isId = item => item.id !== id
-        const updateList = dataCache[searchKey][0].filter(isId);
+        const isId = item => item[0].id !== id
+        const valuesDataCache = Object.values(dataCache).filter(isId);
+        //const updateDataCache = dataCache[searchKey];
 
-        const keyDataCache = Object.keys(dataCache);
-        let updateDataCache = {...dataCache};
-    
-        keyDataCache.forEach(key => {
-            if(updateDataCache[key][0].id === id) {
-                delete updateDataCache[key];
+        console.log(valuesDataCache);
+
+        this.setState(prevState => {
+            const {dataCache, searchKey} = prevState;
+
+            return{
+              dataCache: {
+                  [searchKey]: [...valuesDataCache],
+              }
             }
         })
 
-        this.setState({
+        //const keyDataCache = Object.keys(dataCache);
+        //let updateDataCache = {...dataCache};
+    
+        //keyDataCache.forEach(key => {
+           /* if(updateDataCache[key][0].id === id) {
+                delete updateDataCache[key];
+            }*/
+       // }) 
+
+       /* this.setState({
             dataCache: updateDataCache,
-        });
+        }); */
 
         //nếu id truyền vào giống trong searchKey 
         //của dataCache thì xóa nó đi
@@ -185,10 +198,10 @@ class App extends Component {
     }
 
     render() {
-        const {search, dataCache, isLoading, error} = this.state;
+        const {search, searchKey, dataCache, isLoading, error} = this.state;
         console.log(this.state);
 
-        const list = dataCache && dataCache[search] && dataCache[search][1]
+        const list = dataCache && dataCache[searchKey] && dataCache[searchKey][1]
             ? Object.values(dataCache)
             : []
 

@@ -10,12 +10,13 @@ const TableBottom = (props) => {
         >   
         {
             daily.slice(1,4).map(value => {
-                const urlImg = `http://openweathermap.org/img/wn/${value.weather[0].icon}@2x.png`;
-                const {dt} = value;
+                const {weather, dt, temp} = value;
+
+                const urlImg = `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
 
                 let date = new Date(dt * 1000);
             
-                // checkt --> use toDateString() =>> date month day year; 
+                // check --> use toDateString() =>> date month day year; 
 
                 return(
                     <div className="text-center">
@@ -24,20 +25,20 @@ const TableBottom = (props) => {
                         </div>
             
                         <div>
-                            <p>{value.weather[0].description.toUpperCase()}</p>
+                            <p>{weather[0].description.toUpperCase()}</p>
                         </div>
             
                         <div className="table-flex">
                             <p>
-                                Day {value.temp.day}<span>&#8451;</span>
+                                <span className="text-blue-sd">Day</span> {temp.day}<span>&#8451;</span>
                             </p>
 
                             <p>
-                                Night {value.temp.night}<span>&#8451;</span>
+                                <span className="text-blue-sd">Night</span> {temp.night}<span>&#8451;</span>
                             </p>
                         </div>
             
-                        <div>
+                        <div className="text-right text-red-light">
                             <p>{date.toDateString()}</p>
                         </div>
                     </div>

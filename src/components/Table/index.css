@@ -52,8 +52,17 @@
     color:var(--text-cl);
 }
 
+.text-blue-sd {
+    text-shadow: 1px 1px 4px var(--table-t);
+    color: blue;
+}
+
 .text-white-dark {
     color:var(--text-sd);
+}
+
+.text-red-light {
+    color:var(--text-red-light);
 }
 
 .text-size {
@@ -66,6 +75,10 @@
 
 .text-center {
     text-align: center;
+}
+
+.text-right {
+    text-align: right;
 }
 
 .text-i {
@@ -133,12 +146,11 @@
 }
 
 .btn-i {
-    --i:rgb(245, 18, 90);
 
     font-size:2rem;
     font-weight: 700;
 
-    color:var(--i);
+    color:var(--text-red-light);
 
     transition:0.1s ease-in;
 }
