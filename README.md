@@ -1,4 +1,4 @@
 # The Weather mini
 
-> Current
-> Daily Forecast
+> Current.
+> Daily Forecast.
