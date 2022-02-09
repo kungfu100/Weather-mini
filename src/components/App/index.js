@@ -64,7 +64,7 @@ class App extends Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onDismiss = this.onDismiss.bind(this);
+        //this.onDismiss = this.onDismiss.bind(this);
     }
 
     needToSearch(search) {
@@ -153,7 +153,7 @@ class App extends Component {
         event.preventDefault();
     }
 
-    onDismiss(id) {
+    /*onDismiss(id) {
         const {dataCache, searchKey} = this.state;
 
         const isId = item => item[0].id !== id
@@ -176,18 +176,13 @@ class App extends Component {
         //let updateDataCache = {...dataCache};
     
         //keyDataCache.forEach(key => {
-           /* if(updateDataCache[key][0].id === id) {
+            if(updateDataCache[key][0].id === id) {
                 delete updateDataCache[key];
-            }*/
+            }
        // }) 
-
-       /* this.setState({
-            dataCache: updateDataCache,
-        }); */
-
         //nếu id truyền vào giống trong searchKey 
         //của dataCache thì xóa nó đi
-    }
+    }*/
 
     componentDidMount() {
         const {search,} = this.state;
@@ -206,48 +201,6 @@ class App extends Component {
             : []
 
         return(
-           /* -----test-------
-            <div className="app">
-                <Search
-                    value={search}
-                    onChange={this.onChange}
-                    onSubmit={this.onSubmit}
-                />
-                
-                <main>
-                    <header>
-                        <h1>Daily Weather</h1>
-                    </header>
-
-                    <div className="wrap-padding-bottom">
-                        {
-                            list.map(item => {
-                                return(
-                                    <div className="table">
-                                        <div className="table-top">
-                                            <h2>{item[0].main.temp}</h2>
-                                        </div>
-
-                                        <div className="table-bottom">
-                                            {
-                                                item[1].daily.slice(1,4).map(item => {
-                                                    return(
-                                                        <div>
-                                                            {item.temp.day}
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                    </div>
-                                )
-                            }) 
-                        }
-                    </div>
-                </main>
-            </div>
-            ------------------------*/
-
             <div className="app">
                 <Search
                     value={search}
@@ -265,7 +218,7 @@ class App extends Component {
                         list={list}
                         isLoading={isLoading}
                         isError={error}
-                        onDismiss={this.onDismiss}
+                        //onDismiss={this.onDismiss}
                     />
                     
                 </main>

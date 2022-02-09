@@ -9,7 +9,7 @@ const TableBottom = (props) => {
             className={classTableBottom}
         >   
         {
-            daily.slice(1,4).map(value => {
+            daily.slice(1,4).map((value, index) => {
                 const {weather, dt, temp} = value;
 
                 const urlImg = `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
@@ -19,7 +19,10 @@ const TableBottom = (props) => {
                 // check --> use toDateString() =>> date month day year; 
 
                 return(
-                    <div className="text-center">
+                    <div 
+                        key={index}
+                        className="text-center"
+                    >
                         <div>
                             <img src={urlImg} alt="icon-weather" />
                         </div>
@@ -50,6 +53,13 @@ const TableBottom = (props) => {
 }
 
 TableBottom.propTypes = {
+    daily: PropTypes.arrayOf(
+        PropTypes.shape({
+            weather: PropTypes.array,
+            dt: PropTypes.number,
+            temp: PropTypes.object,
+        })
+    ).isRequired,
     classTableBottom: PropTypes.string,
     children: PropTypes.node,
 }

@@ -5,6 +5,15 @@ import { DismissButton } from "../Buttons";
 import TableTop from "./TableTop";
 import TableBottom from "./TableBottom";
 
+/*
+<DismissButton
+    classDismiss="btn-dismiss"
+    onDismiss={() => onDismiss(id)}
+>
+    <i className="fas fa-times btn-i"></i>
+</DismissButton>
+*/
+
 class Table extends Component {
    
     render() {
@@ -27,12 +36,7 @@ class Table extends Component {
                             weather={weather}
                             name={name}
                         >
-                            <DismissButton
-                                classDismiss="btn-dismiss"
-                                onDismiss={() => onDismiss(id)}
-                            >
-                                <i className="fas fa-times btn-i"></i>
-                            </DismissButton>
+    
                         </TableTop>
                         
                         <TableBottom
