@@ -1,0 +1,28 @@
+@media (max-width: 600px) {
+    .table-item-left, .table-item-right {
+        width: 100%;
+    }
+
+    .table-flex-column-600 {
+        flex-direction: column;
+    }
+
+    .table-flex-order {
+        order: 1;
+    }
+
+    .table-flex-a-c-600 {
+        align-items: center;
+    }
+
+    .table-flex-j-c-600 {
+        justify-content: center;
+    }
+
+    .table-line-600 {
+        display: inline-block;
+        width: 40%;
+        height: 1px;
+        background-color: var(--table-t);
+    }
+}

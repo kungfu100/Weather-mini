@@ -8,6 +8,9 @@
   --i:rgba(150,255,100);
   --i-up:4px;
   --i-down:calc(-1*var(--i-up));
+
+  /*--media*/
+  --tablet: 600px;
 }
 
 html {

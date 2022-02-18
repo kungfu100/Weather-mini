@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import "./index.css";
+import "./index-media-600.css";
 
 import { DismissButton } from "../Buttons";
 import TableTop from "./TableTop";
@@ -31,7 +32,7 @@ class Table extends Component {
                         className="table table-flex table-flex-di"
                     >
                         <TableTop
-                            classTableTop="table-top table-flex wrap-position"
+                            classTableTop="table-top table-flex wrap-position table-flex-column-600 table-flex-a-c-600"
                             main={main}
                             weather={weather}
                             name={name}
@@ -40,7 +41,7 @@ class Table extends Component {
                         </TableTop>
                         
                         <TableBottom
-                            classTableBottom="table-bottom table-flex table-flex-j-sb"
+                            classTableBottom="table-bottom table-flex table-flex-j-sb table-flex-column-600"
                             daily = {daily}
                         >
 

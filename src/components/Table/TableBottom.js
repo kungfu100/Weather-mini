@@ -31,7 +31,7 @@ const TableBottom = (props) => {
                             <p>{weather[0].description.toUpperCase()}</p>
                         </div>
             
-                        <div className="table-flex">
+                        <div className="table-flex table-flex-j-c-600">
                             <p>
                                 <span className="text-blue-sd">Day</span> {temp.day}<span>&#8451;</span>
                             </p>
@@ -44,6 +44,8 @@ const TableBottom = (props) => {
                         <div className="text-right text-red-light">
                             <p>{date.toDateString()}</p>
                         </div>
+
+                        <div className="table-line-600"></div>
                     </div>
                 )
             })

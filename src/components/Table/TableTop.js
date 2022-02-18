@@ -11,7 +11,7 @@ const TableTop = (props) => {
 
     return(
         <div className={classTableTop}>
-            <div className="table-item-left">
+            <div className="table-item-left table-flex-order">
                 <div>
                     <h3 className="text-white text-size">
                         {temp}
